@@ -1,15 +1,17 @@
 package lt.ku.gym.controller;
 
+import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import lt.ku.gym.services.ClientService;
 import lt.ku.gym.entities.Client;
 
@@ -26,15 +28,19 @@ public class ClientController {
 	}
 	@GetMapping("/new")
 	public String clientNew(Model model) {
+		model.addAttribute("client", new Client());
 		return "client_new";
 	}
+	
+	
 	@PostMapping("/new")
 	public String addClient(Model model,
-			@RequestParam("name") String name,
-			@RequestParam("surname") String surname,
-			@RequestParam("email") String email,
-			@RequestParam("phone") String phone) {
-		Client c = new Client(name,surname,email,phone);
+			@Valid
+			@ModelAttribute Client c,
+			BindingResult result) {
+		if(result.hasErrors()) {
+			return "client_new";
+		}
 		clientService.addClient(c);
 		return "redirect:/client/";
 	}
@@ -46,9 +52,15 @@ public class ClientController {
 	
 	@PostMapping("/update/{id}")
 	public String updateClient(
+			@Valid
+			@ModelAttribute Client c,
+			BindingResult result,
 			@PathVariable("id") Integer id,
-			@ModelAttribute Client c
+			Model model
 			) {
+		if(result.hasErrors()) {
+			return "client_update";
+		}
 		clientService.updateClient(c);
 		return "redirect:/client/";
 	}

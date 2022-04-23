@@ -11,12 +11,12 @@
 		<div class="row">
 			<div class="col-md-12 mt-5">
 				<div class="card">
-					<div class="card-header">Atnaujinti klientą</div>
+					<div class="card-header">Atnaujinti treniruotę</div>
 					<div class="card-body">
-						<form th:action="'/client/update/'+${client.id}" method="post" th:object="${client}">
+						<form th:action="'/workout/update/'+${workout.id}" method="post" th:object="${workout}">
 						    <input type="hidden" name="id" th:value="*{id}">
 							<div class="mb-3">
-								<label class="form-label">Vardas</label>
+								<label class="form-label">Pavadinimas</label>
 								<input type="text" class="form-control" name="name" th:value="*{name}"> 
 								<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}">
 									<ul>
@@ -25,29 +25,29 @@
 								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">Pavardė</label>
-								<input type="text" class="form-control" name="surname" th:value="*{surname}">
-								<div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}">
+								<label class="form-label">Data</label>
+								<input type="text" class="form-control" name="date" th:value="*{date}">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('date')}">
 									<ul>
-										<li th:each="klaida: ${#fields.errors('surname')}" th:text="${klaida}"></li>
+										<li th:each="klaida: ${#fields.errors('date')}" th:text="${klaida}"></li>
 									</ul>
 								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">El. paštas</label>
-								<input type="text" class="form-control" name="email" th:value="*{email}">
-								<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}">
+								<label class="form-label">Vietų skaičius</label>
+								<input type="text" class="form-control" name="places" th:value="*{places}">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('places')}">
 									<ul>
-										<li th:each="klaida: ${#fields.errors('email')}" th:text="${klaida}"></li>
+										<li th:each="klaida: ${#fields.errors('places')}" th:text="${klaida}"></li>
 									</ul>
 								</div>
 							</div>
 							<div class="mb-3">
-								<label class="form-label">Telefono numeris</label>
-								<input type="text" class="form-control" name="phone" th:value="*{phone}">
-								<div class="alert alert-danger" th:if="${#fields.hasErrors('phone')}">
+								<label class="form-label">Lokacija</label>
+								<input type="text" class="form-control" name="location" th:value="*{location}">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('location')}">
 									<ul>
-										<li th:each="klaida: ${#fields.errors('phone')}" th:text="${klaida}"></li>
+										<li th:each="klaida: ${#fields.errors('location')}" th:text="${klaida}"></li>
 									</ul>
 								</div>
 							</div>

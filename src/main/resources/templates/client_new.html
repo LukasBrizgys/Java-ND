@@ -13,22 +13,42 @@
 				<div class="card">
 					<div class="card-header">Pridėti naują klientą</div>
 					<div class="card-body">
-						<form action="/client/new" method="post">
+						<form action="/client/new" method="post" th:object="${client}">
 							<div class="mb-3">
 								<label class="form-label">Kliento vardas</label>
-								<input type="text" class="form-control" name="name">
+								<input type="text" class="form-control" th:value="*{name}" name="name">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}">
+									<ul>
+										<li th:each="klaida: ${#fields.errors('name')}" th:text="${klaida}"></li>
+									</ul>
+								</div>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Kliento pavardė</label>
-								<input type="text" class="form-control" name="surname">
+								<input type="text" class="form-control" th:value="*{surname}" name="surname">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('surname')}">
+									<ul>
+										<li th:each="klaida: ${#fields.errors('surname')}" th:text="${klaida}"></li>
+									</ul>
+								</div>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Kliento el. paštas</label>
-								<input type="email" class="form-control" name="email">
+								<input type="email" class="form-control" th:value="*{email}" name="email">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}">
+									<ul>
+										<li th:each="klaida: ${#fields.errors('email')}" th:text="${klaida}"></li>
+									</ul>
+								</div>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Kliento telefono numeris</label>
-								<input type="text" class="form-control" name="phone">
+								<input type="text" class="form-control" th:value="*{phone}" name="phone">
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('phone')}">
+									<ul>
+										<li th:each="klaida: ${#fields.errors('phone')}" th:text="${klaida}"></li>
+									</ul>
+								</div>
 							</div>
 							<button type="submit" class="btn btn-success">Pridėti</button>
 						</form>
