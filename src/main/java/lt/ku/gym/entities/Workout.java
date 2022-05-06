@@ -37,7 +37,6 @@ public class Workout {
 	private String date;
 	
 	@Column
-	
 	@Min(value=0, message = "Vietų skaičius turi būti didesnis arba lygus 0")
 	@Max(value=9999, message = "Vietų skaičius turi būti mažesnis arba lygus 9999")
 	@NotNull(message = "Įveskite vietų skaičių")
@@ -47,17 +46,26 @@ public class Workout {
 	@NotEmpty(message = "Įrašykite treniruotės vietą")
 	private String location;
 	
+	@Column
+	private String fileName;
+	
 	@OneToMany(mappedBy = "workout", fetch = FetchType.EAGER)
 	private List<Registration> registrations;
 	
 	public Workout() {}
-	public Workout(String name, String date, Integer places, String location) {
+	
+	public Workout(@Length(min = 3, message = "Treniruotės pavadinimas turi būti ilgesnis nei 3 simboliai") String name,
+			@NotEmpty(message = "Įveskite datą") String date,
+			@Min(value = 0, message = "Vietų skaičius turi būti didesnis arba lygus 0") @Max(value = 9999, message = "Vietų skaičius turi būti mažesnis arba lygus 9999") @NotNull(message = "Įveskite vietų skaičių") Integer places,
+			@NotEmpty(message = "Įrašykite treniruotės vietą") String location, String fileName) {
 		super();
 		this.name = name;
-		this.date =  date;
+		this.date = date;
 		this.places = places;
 		this.location = location;
+		this.fileName = fileName;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -104,6 +112,12 @@ public class Workout {
 	}
 	public void setRegistrations(List<Registration> registrations) {
 		this.registrations = registrations;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 	

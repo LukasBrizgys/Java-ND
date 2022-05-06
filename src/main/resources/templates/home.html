@@ -13,7 +13,7 @@
 				<div class="col-md-12 mt-5">
 					<div class="card">
 						<div class="card-header">Sporto salės sistema</div>
-						<div class="card-body">
+						<div class="card-body" sec:authorize="hasAuthority('admin')">
 							<h2>Klientai</h2>
 							<a href="/client/" class="btn btn-info">Parodyti sportininkų sąrašą</a>	
 						</div>
@@ -23,11 +23,9 @@
 							
 						
 						</div>
-						<div class="card-body">
+						<div class="card-body" sec:authorize="hasAuthority('admin')">
 							<h2>Registracijos</h2>
 							<a href="/registration/" class="btn btn-info">Parodyti registracijų sąrašą</a>
-							
-						
 						</div>
 					</div>
 				</div>

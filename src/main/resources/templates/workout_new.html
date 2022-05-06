@@ -13,7 +13,8 @@
 				<div class="card">
 					<div class="card-header">Pridėti naują Treniruotę</div>
 					<div class="card-body">
-						<form action="/workout/new" method="post" th:object="${workout}">
+						<form action="/workout/new" method="post" th:object="${workout}" enctype="multipart/form-data">
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 							<div class="mb-3">
 								<label class="form-label">Treniruotės pavadinimas</label>
 								<input type="text" class="form-control" th:value="*{name}" name="name">
@@ -49,6 +50,10 @@
 										<li th:each="klaida: ${#fields.errors('location')}" th:text="${klaida}"></li>
 									</ul>
 								</div>
+							</div>
+							<div class="mb-3">
+						<label class="form-label"></label>
+						<input class="form-control" type="file" th:value="*{fileName}" name="agreement">
 							</div>
 							<button type="submit" class="btn btn-success">Pridėti</button>
 						</form>

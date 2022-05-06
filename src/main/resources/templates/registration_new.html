@@ -14,7 +14,7 @@
 					<div class="card-header">Pridėti naują Registraciją</div>
 					<div class="card-body">
 						<form action="/registration/new" method="post" th:object="${registration}">
-						
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 							<div class="mb-3">
 								<label class="form-label">Registracijos data</label>
 								<input type="text" class="form-control" name="registration_date" th:value="*{registration_date}" placeholder="YYYY-MM-DD">

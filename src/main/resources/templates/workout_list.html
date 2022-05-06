@@ -14,7 +14,7 @@
 				<div class="card">
 					<div class="card-header">Treniruočių sąrašas</div>
 					<div class="card-body">
-						<a href="/workout/new" class="btn btn-info">Pridėti naują treniruotę</a>
+						<a href="/workout/new" class="btn btn-info" sec:authorize="hasAuthority('admin')">Pridėti naują treniruotę</a>
 						<table class="table">
 						  <tr>
 						  	<th>Treniruotės pavadinimas</th>
@@ -29,9 +29,12 @@
 						  	<td th:text="${workout.date}"></td>
 						  	<td th:text="${workout.places}"></td>
 						  	<td th:text="${workout.location}"></td>
+						  	<td>
+						  		<a th:href="'/workout/agreement/'+${workout.id}" class="btn btn-success">Parsiųsti</a>
+						  	</td>
 						  	<td style="width: 200px;">
-						  		<a th:href="'/workout/update/'+${workout.id}" class="btn btn-success">Redaguoti</a>
-						  		<a th:href="'/workout/delete/'+${workout.id}" class="btn btn-danger">Ištrinti</a>
+						  		<a th:href="'/workout/update/'+${workout.id}" sec:authorize="hasAuthority('admin')" class="btn btn-success">Redaguoti</a>
+						  		<a th:href="'/workout/delete/'+${workout.id}" sec:authorize="hasAuthority('admin')" class="btn btn-danger">Ištrinti</a>
 						  	</td>
 						  
 						  </tr>
